@@ -9,7 +9,12 @@ public class App {
     PrintStream out;
     public static void main(String[] args) {
 
-        start();
+        Scanner in = new Scanner(System.in);
+        Set set1 = new Set(), set2 = new Set();
+
+        while (askBothSets(in, set1, set2)) {
+            calculateAndGiveOutput(set1, set2);
+        }
     }
 
     boolean askSet (Scanner input, String question, Set set) {
@@ -29,16 +34,6 @@ public class App {
                 askSet(input, "Give second set : ", set2);
     }
 
-
-    static void start () {
-        Scanner in = new Scanner(System.in);
-        Set set1 = new Set(),
-                set2 = new Set();
-
-        while (askBothSets(in, set1, set2)) {
-            calculateAndGiveOutput(set1, set2);
-        }
-    }
 
 //TODO make inputContainsCorrectSet
 //Alphanumeric, max amount of elements, we still have to read the input into set.
