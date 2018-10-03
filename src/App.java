@@ -1,7 +1,26 @@
-package com.nasajens;
+/*
+* Allowed functions:
+* java.lang.String
+* java.lang.Buffer
+* java.io.PrintStream
+* java.util.Scanner
+*
+* you cannot!! use java.util.StringTokenizer
+* Treating the input as a stream of characters is advised
+*
+* */
+//TODO uitzoeken hoe we de elementen van de Set in de Set class gaan opslaan
+//TODO class Set implementeren: add(), remove(), size() etc..
+//TODO input lezen en opslaan in class Set
+
+//TODO make inputContainsCorrectSet
+//Alphanumeric, max amount of elements, we still have to read the input into set.
+//TODO make calculateAndGiveOutput
+//make the four functions
+
 import java.util.Scanner;
 import java.io.PrintStream;
-import java.util.Set;
+//import java.util.Set;
 
 public class App {
 
@@ -33,12 +52,5 @@ public class App {
         return askSet(input, "Give first set : ", set1) &&
                 askSet(input, "Give second set : ", set2);
     }
-
-
-//TODO make inputContainsCorrectSet
-//Alphanumeric, max amount of elements, we still have to read the input into set.
-//TODO make calculateAndGiveOutput
-//make the four functions
-//TODO Yuri organize code
 
 }
