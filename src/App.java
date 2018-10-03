@@ -3,16 +3,14 @@ import java.util.Scanner;
 import java.io.PrintStream;
 import java.util.Set;
 
-static final int MAX_NUMBER_OF_ELEMENTS = 10;
-        PrintStream out;
+public class App {
 
-public class Main {
-
+    static final int MAX_NUMBER_OF_ELEMENTS = 10;
+    PrintStream out;
     public static void main(String[] args) {
 
         start();
     }
-}
 
     boolean askSet (Scanner input, String question, Set set) {
         do {
@@ -47,3 +45,5 @@ public class Main {
 //TODO make calculateAndGiveOutput
 //make the four functions
 //TODO Yuri organize code
+
+}
