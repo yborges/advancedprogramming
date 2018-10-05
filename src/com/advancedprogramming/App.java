@@ -37,7 +37,9 @@ public class App {
        Set set1 = new Set(), set2 = new Set();
 
        while (askBothSets( set1, set2)) {
-           //calculateAndGiveOutput(set1, set2);
+
+           Set differenceSet = set1.difference(set2);
+           differenceSet.printSet();
        }
    }
 
