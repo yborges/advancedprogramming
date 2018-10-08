@@ -39,7 +39,11 @@ public class App {
        while (askBothSets( set1, set2)) {
 
            Set differenceSet = set1.difference(set2);
-           differenceSet.printSet();
+           differenceSet.printSet("difference = ");
+
+           Set unionSet = differenceSet.union(set2);
+           unionSet.printSet("union = ");
+
        }
    }
 

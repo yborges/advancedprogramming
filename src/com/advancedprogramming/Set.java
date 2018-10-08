@@ -14,7 +14,6 @@ public class Set {
     void add(String element){
         stringArray[sizeSet] = element;
         sizeSet++;
-//
 //        System.out.print(position - 1);
 //        System.out.println(stringArray[position -1]);
     }
@@ -42,20 +41,40 @@ public class Set {
             }
         }
         return differenceSet;
-
-    }
-    public void intersection (Set otherSet) {
-
-    }
-    public void union (Set otherSet) {
-
-    }
-    public void symmetric_difference(Set otherSet) {
-
     }
 
-    public void printSet() {
+    //intersection is everything that is in set1 and also in set2
+    public Set intersection (Set otherSet) {
+        Set intersectionSet = new Set();
 
+        return intersectionSet;
+    }
+
+    //union = differenceSet + second set, It is this easy because the manual says 'Sets do not contain duplicate elements
+    // per definition)
+    public Set union (Set secondSet) {
+        Set unionSet = new Set();
+        //int position =0;
+        for (int position =0; position<sizeSet; position++){
+            unionSet.add(this.stringArray[position]);
+        }
+        //If for-loop from above is finished, set2 has to be added to unionSet
+        for(int i =0; i <secondSet.sizeSet; i++ ){
+            unionSet.add(secondSet.stringArray[i]);
+        }
+
+        return unionSet;
+    }
+
+    //symmetric difference = ( set1 + set2 ) - intersection.
+    public Set symmetric_difference(Set otherSet) {
+        Set symdifSet = new Set();
+
+        return symdifSet;
+    }
+
+    public void printSet(String function) {
+        System.out.print(function);
         System.out.print('{');
         for ( int i=0; i < sizeSet; i++ ) {
             if(i == sizeSet - 1){
