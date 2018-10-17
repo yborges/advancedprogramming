@@ -34,6 +34,7 @@ public class App {
    }
 
    void start() {
+
        Set set1 = new Set(), set2 = new Set();
 
        while (askBothSets( set1, set2)) {
@@ -50,6 +51,8 @@ public class App {
            Set symdifSet = set1.symmetric_difference(set2, intersectionSet);
            symdifSet.printSet("sym. diff. = ");
 
+           set1 = new Set();
+           set2 = new Set();
        }
    }
 
