@@ -9,15 +9,23 @@
  * Treating the input as a stream of characters is advised
  *
  * */
-//TODO uitzoeken hoe we de elementen van de com.advancedprogramming.Set in de com.advancedprogramming.Set class gaan opslaan
-//TODO class com.advancedprogramming.Set implementeren: add(), remove(), size() etc..
-//TODO input lezen en opslaan in class com.advancedprogramming.Set
 
-//TODO make inputContainsCorrectSet
-//Alphanumeric, max amount of elements, we still have to read the input into set.
-//TODO make calculateAndGiveOutput
-//make the four functions
+
 //TODO destructor schrijven... scanner.close() mss ook in.close?
+
+//TODO VRAGEN TA wat ze met 10 identifiers bedoelen voor input en 20 voor set. bedoelen ze dat een set maar 20 elementen
+//kan hebben waarvan elk element maar 10 characters lang is?
+
+//TODO VRAGEN TA of error handling met IF's genoeg is óf we met error handling moeten gaan werken. Als het laatste
+// het geval is, dan moeten we ook weten de makkelijkste manier om die errors te catchen. Ivm Exception type zou ik
+// niet weten hoe error handling makkelijk kan in dit geval zonder dat we een eigen exeption type gaan maken en dat
+// lijkt me niet makkelijk
+
+//TODO TA onze code laten zien en vragen of er ruimte is voor verbeteringen
+//TODO commentaar overal schrijven voordat we naar de TA gaan
+
+
+
 
 package com.advancedprogramming;
 import java.util.Scanner;
@@ -25,7 +33,7 @@ import java.io.PrintStream;
 
 public class App {
 
-    PrintStream out = new PrintStream(System.out);
+    PrintStream out = System.out;
     Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -68,11 +76,11 @@ public class App {
     boolean askSet (String question, Set set) {
         do {
             out.printf("%s", question);
-            if (! in.hasNextLine()) {
-                out.println("we are here");
-                out.printf("\n"); // otherwise line with ^D will be overwritten
-                return false;
-            }
+//            if (! in.hasNextLine()) {
+//                out.println("we are here");
+//                out.printf("\n"); // otherwise line with ^D will be overwritten
+//                return false;
+//            }
         } while (! inputContainsCorrectSet(set));
         return true;
     }
@@ -83,8 +91,9 @@ public class App {
             String bufferLine = in.nextLine();
             String bufferToken;
 
+            //TODO this comment talks about 10 identifiers. Rewrite after TA meeting if needed.
             /* Calculates the amount of tokens in the stream. If the stream has more than 10 elements or less than
-            1 element then we need to ask for an element again. Comparison comes in the IF statement bellow  */
+            0 elements then we need to ask for an element again. Comparison comes in the IF statement bellow  */
             int numTokens = bufferLine.split(in.delimiter().pattern()).length;
 
             /* Checks for some conditions that the string has to meet even before we apply a Scanner on the
@@ -106,23 +115,33 @@ public class App {
                     bufferToken = scString.next();
 
                     if (!bufferToken.matches("[A-Za-z0-9]+")) {
-                        System.out.println("input is not alphanumeric");
+                        out.println("input is not alphanumeric");
                         return false;
                     }
                     if(!bufferToken.substring(0, 1).matches("[a-zA-Z]")) {
-                        System.out.println("the first character of one or more elements is not a letter");
+                        out.println("the first character of one or more elements is not a letter");
                         return false;
                     }
                     populateArray(bufferToken, set);
                 }
             } else if ( bufferLine.charAt(0) != '{' ) {
-                System.out.println("First bracket missing");
-                return false;
+                if ( bufferLine.contains("{") ) { //check whether user put the final brackets somewhere else
+                    out.println("No input allowed before first bracket");
+                    return false;
+                } else {
+                    out.println("First bracket missing");
+                    return false;
+                }
             } else if ( bufferLine.charAt(bufferLine.length() - 1) != '}') {
-                System.out.println("Last bracket missing");
+                if ( bufferLine.contains("}") ) { //check whether user put the final brackets somewhere else
+                    out.println("No input allowed after last bracket");
+                } else {
+                    out.println("Last bracket missing");
+                    return false;
+                }
                 return false;
             } else if ( numTokens > 10 || numTokens < 0 ) {
-                System.out.println("Invalid number of elements");
+                out.println("Invalid number of elements");
                 return false;
             }
         }
