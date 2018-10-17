@@ -127,22 +127,23 @@ public class App {
                     populateArray(bufferToken, set);
                 }
             } else if ( bufferLine.charAt(0) != '{' ) {
-                if ( bufferLine.contains("{") ) { //check whether user put the final brackets somewhere else
+                if ( bufferLine.contains("{") ) { //check whether user put the '{' somewhere else than at the beginning
                     out.println("No input allowed before '{'");
                     return false;
-                } else {
+                } else {    //if '{' is not at the beginning and not somewhere else, than there is no '{'
                     out.println("Missing '{'");
                     return false;
                 }
             } else if ( bufferLine.charAt(bufferLine.length() - 1) != '}') {
-                if ( bufferLine.contains("}") ) { //check whether user put the final brackets somewhere else
+                if ( bufferLine.contains("}") ) { //check whether user put the '}' somewhere else than at the end
                     out.println("No input allowed after '}'");
-                } else {
+                } else {    //if '}' is not at the end and not somewhere else, than there is no '}'
                     out.println("Missing '}'");
                     return false;
                 }
                 return false;
-            } else if ( numTokens > 10 || numTokens < 0 ) {
+            } else if ( numTokens > 10 || numTokens < 0 ) { //number of elements, 'numTokens' should be less than or
+                // equal to 10 and greater than or equal to 0
                 out.println("Invalid number of elements");
                 return false;
             }

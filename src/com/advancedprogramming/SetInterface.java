@@ -5,17 +5,16 @@ public interface SetInterface {
 
     int get_size();
 
-    //difference = all elements contained in the 1st but not the 2nd set.
+    //difference: all elements contained in the 1st but not the 2nd set.
     Set difference(Set otherSet);
 
-    //intersection is everything that is in set1 and also in set2
+    //intersection: all elements contained in both sets.
     Set intersection(Set otherSet);
 
-    //union = differenceSet + second set, It is this easy because the manual says 'Sets do not contain duplicate elements
-    // per definition'
+    //union: all elements of both sets. (N.B. sets do not contain duplicate elements per definition.)
     Set union(Set secondSet);
 
-    //symmetric difference = ( set1 + set2 ) - intersection.
+    //symmetric difference: all elements of both sets that are not contained in he intersection.
     Set symmetric_difference(Set set2, Set intersection);
 
     void print(String function);

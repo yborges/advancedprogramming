@@ -44,6 +44,7 @@ public class Set implements SetInterface {
         return differenceSet;
     }
 
+    //intersection: all elements contained in both sets.
     //intersection is everything that is in set1 and also in set2
     @Override
     public Set intersection(Set otherSet) {
@@ -68,8 +69,9 @@ public class Set implements SetInterface {
         return intersectionSet;
     }
 
-    //union = differenceSet + second set, It is this easy because the manual says 'Sets do not contain duplicate elements
-    // per definition)
+    /*union = all elements of both sets. (N.B. sets do not contain duplicate elements per definition.).
+    union = differenceSet + second set, It is this easy because the manual says 'Sets do not contain duplicate elements
+    per definition) */
     @Override
     public Set union(Set secondSet) {
         Set unionSet = new Set();
@@ -85,6 +87,7 @@ public class Set implements SetInterface {
         return unionSet;
     }
 
+    //symmetric difference: all elements of both sets that are not contained in he intersection.
     //symmetric difference = ( set1 + set2 ) - intersection.
     @Override
     public Set symmetric_difference(Set set2, Set intersection) {
