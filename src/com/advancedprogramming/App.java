@@ -7,7 +7,6 @@
  *
  * you cannot!! use java.util.StringTokenizer
  * Treating the input as a stream of characters is advised
- *
  * */
 
 
@@ -23,8 +22,7 @@
 
 //TODO TA onze code laten zien en vragen of er ruimte is voor verbeteringen
 //TODO commentaar overal schrijven voordat we naar de TA gaan
-
-
+//TODO vragen of class en interface set generic moeten.
 
 
 package com.advancedprogramming;
@@ -46,19 +44,24 @@ public class App {
        Set set1 = new Set(), set2 = new Set();
 
        while (askBothSets( set1, set2)) {
-
+           //Calculates and prints the difference
            Set differenceSet = set1.difference(set2);
            differenceSet.print("difference = ");
 
+           //Calculates and prints the intersection
            Set intersectionSet = set1.intersection(set2);
            intersectionSet.print("intersection = ");
 
+           //Calculates and prints the difference
            Set unionSet = differenceSet.union(set2);
            unionSet.print("union = ");
 
+           //Calculates and prints the symmetric difference and and an empty line
            Set symdifSet = set1.symmetric_difference(set2, intersectionSet);
            symdifSet.print("sym. diff. = ");
            out.println();
+
+           //assigns new empty Set objects for the next iteration
            set1 = new Set();
            set2 = new Set();
        }
@@ -86,6 +89,7 @@ public class App {
             String bufferLine = in.nextLine();
             String bufferToken;
 
+            //This 'if' makes sure that if there is no input, the user will just be asked for the set again.
              if ( bufferLine.length() < 1 ) return false;
 
             //TODO this comment talks about 10 identifiers. Rewrite after TA meeting if needed.
@@ -110,11 +114,12 @@ public class App {
 
                     //the value of the token in each iteration will be assigned to the String buffer
                     bufferToken = scString.next();
-
+                    //Check if element is alphanumeric
                     if (!bufferToken.matches("[A-Za-z0-9]+")) {
                         out.println("input is not alphanumeric");
                         return false;
                     }
+                    //Check if the first character of element is a letter
                     if(!bufferToken.substring(0, 1).matches("[a-zA-Z]")) {
                         out.println("the first character of one or more elements is not a letter");
                         return false;
@@ -123,17 +128,17 @@ public class App {
                 }
             } else if ( bufferLine.charAt(0) != '{' ) {
                 if ( bufferLine.contains("{") ) { //check whether user put the final brackets somewhere else
-                    out.println("No input allowed before first bracket");
+                    out.println("No input allowed before '{'");
                     return false;
                 } else {
-                    out.println("First bracket missing");
+                    out.println("Missing '{'");
                     return false;
                 }
             } else if ( bufferLine.charAt(bufferLine.length() - 1) != '}') {
                 if ( bufferLine.contains("}") ) { //check whether user put the final brackets somewhere else
-                    out.println("No input allowed after last bracket");
+                    out.println("No input allowed after '}'");
                 } else {
-                    out.println("Last bracket missing");
+                    out.println("Missing '}'");
                     return false;
                 }
                 return false;

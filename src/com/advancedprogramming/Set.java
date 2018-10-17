@@ -13,8 +13,6 @@ public class Set implements SetInterface {
     public void add(String element){
         stringArray[sizeSet] = element;
         sizeSet++;
-//        System.out.print(position - 1);
-//        System.out.println(stringArray[position -1]);
     }
 
     @Override
@@ -22,6 +20,7 @@ public class Set implements SetInterface {
         return sizeSet;
     }
 
+    //difference = all elements contained in the 1st but not the 2nd set.
     @Override
     public Set difference(Set otherSet) {
         Set differenceSet = new Set();
