@@ -40,16 +40,16 @@ public class App {
        while (askBothSets( set1, set2)) {
 
            Set differenceSet = set1.difference(set2);
-           differenceSet.printSet("difference = ");
+           differenceSet.print("difference = ");
 
            Set intersectionSet = set1.intersection(set2);
-           intersectionSet.printSet("intersection = ");
+           intersectionSet.print("intersection = ");
 
            Set unionSet = differenceSet.union(set2);
-           unionSet.printSet("union = ");
+           unionSet.print("union = ");
 
            Set symdifSet = set1.symmetric_difference(set2, intersectionSet);
-           symdifSet.printSet("sym. diff. = ");
+           symdifSet.print("sym. diff. = ");
 
            set1 = new Set();
            set2 = new Set();

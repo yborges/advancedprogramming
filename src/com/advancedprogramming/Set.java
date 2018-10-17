@@ -2,25 +2,28 @@
 //{abc ghi jen yur jan}
 package com.advancedprogramming;
 
-public class Set {
+public class Set implements SetInterface {
 
     static final int MAX_NUMBER_OF_ELEMENTS = 10;
 
     String[] stringArray = new String[MAX_NUMBER_OF_ELEMENTS];
-    int sizeSet = 0;
+    private int sizeSet = 0;
 
-    void add(String element){
+    @Override
+    public void add(String element){
         stringArray[sizeSet] = element;
         sizeSet++;
 //        System.out.print(position - 1);
 //        System.out.println(stringArray[position -1]);
     }
 
-    int get_size(){
-        return stringArray.length;
+    @Override
+    public int get_size(){
+        return sizeSet;
     }
 
-    public Set difference (Set otherSet) {
+    @Override
+    public Set difference(Set otherSet) {
         Set differenceSet = new Set();
 
         boolean elementSet1PresentInSet2;
@@ -43,7 +46,8 @@ public class Set {
     }
 
     //intersection is everything that is in set1 and also in set2
-    public Set intersection (Set otherSet) {
+    @Override
+    public Set intersection(Set otherSet) {
         Set intersectionSet = new Set();
 
         boolean elementSet1PresentInSet2;
@@ -67,7 +71,8 @@ public class Set {
 
     //union = differenceSet + second set, It is this easy because the manual says 'Sets do not contain duplicate elements
     // per definition)
-    public Set union (Set secondSet) {
+    @Override
+    public Set union(Set secondSet) {
         Set unionSet = new Set();
         //int position =0;
         for (int position =0; position<sizeSet; position++){
@@ -82,7 +87,8 @@ public class Set {
     }
 
     //symmetric difference = ( set1 + set2 ) - intersection.
-    public Set symmetric_difference (Set set2, Set intersection) {
+    @Override
+    public Set symmetric_difference(Set set2, Set intersection) {
         Set symdifSet = new Set();
 
         boolean elementSet1PresentInIntersection;
@@ -117,7 +123,8 @@ public class Set {
         return symdifSet;
     }
 
-    public void printSet(String function) {
+    @Override
+    public void print(String function) {
         System.out.print(function);
         System.out.print('{');
         if(sizeSet > 0) {
