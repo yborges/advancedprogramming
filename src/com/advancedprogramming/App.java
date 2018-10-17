@@ -76,11 +76,6 @@ public class App {
     boolean askSet (String question, Set set) {
         do {
             out.printf("%s", question);
-//            if (! in.hasNextLine()) {
-//                out.println("we are here");
-//                out.printf("\n"); // otherwise line with ^D will be overwritten
-//                return false;
-//            }
         } while (! inputContainsCorrectSet(set));
         return true;
     }
@@ -90,6 +85,8 @@ public class App {
 
             String bufferLine = in.nextLine();
             String bufferToken;
+
+             if ( bufferLine.length() < 1 ) return false;
 
             //TODO this comment talks about 10 identifiers. Rewrite after TA meeting if needed.
             /* Calculates the amount of tokens in the stream. If the stream has more than 10 elements or less than
