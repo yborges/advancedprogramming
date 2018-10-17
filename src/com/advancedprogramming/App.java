@@ -105,17 +105,24 @@ public class App {
                     //the value of the token in each iteration will be assigned to the String buffer
                     bufferToken = scString.next();
 
-                    if (!bufferToken.matches("[A-Za-z0-9]+") ||
-                            !bufferToken.substring(0, 1).matches("[a-zA-Z]")) {
-
-                        System.out.println("input is not alphanumeric or first character of one or more elements " +
-                                "is not a letter");
+                    if (!bufferToken.matches("[A-Za-z0-9]+")) {
+                        System.out.println("input is not alphanumeric");
+                        return false;
+                    }
+                    if(!bufferToken.substring(0, 1).matches("[a-zA-Z]")) {
+                        System.out.println("the first character of one or more elements is not a letter");
                         return false;
                     }
                     populateArray(bufferToken, set);
                 }
-            } else {
-                System.out.println("ERROR brackets missing or total amount of elements in the set not allowed");
+            } else if ( bufferLine.charAt(0) != '{' ) {
+                System.out.println("First bracket missing");
+                return false;
+            } else if ( bufferLine.charAt(bufferLine.length() - 1) != '}') {
+                System.out.println("Last bracket missing");
+                return false;
+            } else if ( numTokens > 10 || numTokens < 0 ) {
+                System.out.println("Invalid number of elements");
                 return false;
             }
         }
