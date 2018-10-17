@@ -58,7 +58,7 @@ public class App {
 
            Set symdifSet = set1.symmetric_difference(set2, intersectionSet);
            symdifSet.print("sym. diff. = ");
-
+           out.println();
            set1 = new Set();
            set2 = new Set();
        }
