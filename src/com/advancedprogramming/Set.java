@@ -120,12 +120,16 @@ public class Set {
     public void printSet(String function) {
         System.out.print(function);
         System.out.print('{');
-        for ( int i=0; i < sizeSet; i++ ) {
-            if(i == sizeSet - 1){
-                System.out.println(stringArray[i] + "}");
-            } else {
-                System.out.print(stringArray[i] + " ");
+        if(sizeSet > 0) {
+            for ( int i=0; i < sizeSet; i++ ) {
+                if(i == sizeSet - 1){
+                    System.out.println(stringArray[i] + "}");
+                } else {
+                    System.out.print(stringArray[i] + " ");
+                }
             }
+        } else {
+            System.out.println("}");
         }
     }
 }
