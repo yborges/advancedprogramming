@@ -4,15 +4,17 @@ package com.advancedprogramming;
 
 public class Set implements SetInterface {
 
-    static final int MAX_NUMBER_OF_ELEMENTS = 10;
-
-    String[] stringArray = new String[MAX_NUMBER_OF_ELEMENTS];
+    String[] stringArray = new String[MAX_NUM_IDENTIFIERS];
     private int sizeSet = 0;
 
     @Override
-    public void add(String element){
+    public boolean add(String element){
+        if (MAX_NUM_IDENTIFIERS == sizeSet) {
+            return false;
+        }
         stringArray[sizeSet] = element;
         sizeSet++;
+        return true;
     }
 
     @Override
@@ -126,8 +128,7 @@ public class Set implements SetInterface {
     }
 
     @Override
-    public void print(String function) {
-        System.out.print(function);
+    public void print() {
         System.out.print('{');
         if(sizeSet > 0) {
             for ( int i=0; i < sizeSet; i++ ) {

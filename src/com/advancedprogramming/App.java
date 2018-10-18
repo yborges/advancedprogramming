@@ -31,6 +31,8 @@ import java.io.PrintStream;
 
 public class App {
 
+    public static final int MAX_NUM_INDENTIFIERS_INPUT = 10;
+
     PrintStream out = System.out;
     Scanner in = new Scanner(System.in);
 
@@ -45,20 +47,24 @@ public class App {
 
        while (askBothSets( set1, set2)) {
            //Calculates and prints the difference
+           out.print("difference = ");
            Set differenceSet = set1.difference(set2);
-           differenceSet.print("difference = ");
+           differenceSet.print();
 
            //Calculates and prints the intersection
+           out.print("intersection = ");
            Set intersectionSet = set1.intersection(set2);
-           intersectionSet.print("intersection = ");
+           intersectionSet.print();
 
            //Calculates and prints the difference
+           out.print("union = ");
            Set unionSet = differenceSet.union(set2);
-           unionSet.print("union = ");
+           unionSet.print();
 
            //Calculates and prints the symmetric difference and and an empty line
+           out.print("sym. diff. = ");
            Set symdifSet = set1.symmetric_difference(set2, intersectionSet);
-           symdifSet.print("sym. diff. = ");
+           symdifSet.print();
            out.println();
 
            //assigns new empty Set objects for the next iteration
@@ -79,6 +85,7 @@ public class App {
     boolean askSet (String question, Set set) {
         do {
             out.printf("%s", question);
+
         } while (! inputContainsCorrectSet(set));
         return true;
     }
@@ -100,7 +107,7 @@ public class App {
             /* Checks for some conditions that the string has to meet even before we apply a Scanner on the
             string to extract the values of each element of the given Set */
             if (bufferLine.charAt(0) == '{' && bufferLine.charAt(bufferLine.length() - 1) == '}'
-                    && numTokens <= 10 && numTokens >= 1) {
+                    && numTokens <= MAX_NUM_INDENTIFIERS_INPUT && numTokens >= 1) {
 
                 /* At this point the conditions above have been met and so we remove the first and last character
                 of the string and feed it to the scanner */
@@ -114,17 +121,9 @@ public class App {
 
                     //the value of the token in each iteration will be assigned to the String buffer
                     bufferToken = scString.next();
-                    //Check if element is alphanumeric
-                    if (!bufferToken.matches("[A-Za-z0-9]+")) {
-                        out.println("input is not alphanumeric");
-                        return false;
-                    }
-                    //Check if the first character of element is a letter
-                    if(!bufferToken.substring(0, 1).matches("[a-zA-Z]")) {
-                        out.println("the first character of one or more elements is not a letter");
-                        return false;
-                    }
-                    populateArray(bufferToken, set);
+
+                    Identifier identifier = new Identifier(bufferToken);
+                    populateArray(identifier.get_name(), set);
                 }
             } else if ( bufferLine.charAt(0) != '{' ) {
                 if ( bufferLine.contains("{") ) { //check whether user put the '{' somewhere else than at the beginning
@@ -142,7 +141,8 @@ public class App {
                     return false;
                 }
                 return false;
-            } else if ( numTokens > 10 || numTokens < 0 ) { //number of elements, 'numTokens' should be less than or
+            } else if ( numTokens > MAX_NUM_INDENTIFIERS_INPUT || numTokens < 0 ) {
+                //number of elements, 'numTokens' should be less than or
                 // equal to 10 and greater than or equal to 0
                 out.println("Invalid number of elements");
                 return false;

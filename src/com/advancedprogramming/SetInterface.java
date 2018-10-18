@@ -1,7 +1,10 @@
 package com.advancedprogramming;
 
 public interface SetInterface {
-    void add(String element);
+
+    public static final int MAX_NUM_IDENTIFIERS = 20;
+
+    boolean add(String element);
 
     int get_size();
 
@@ -17,5 +20,5 @@ public interface SetInterface {
     //symmetric difference: all elements of both sets that are not contained in he intersection.
     Set symmetric_difference(Set set2, Set intersection);
 
-    void print(String function);
+    void print();
 }
