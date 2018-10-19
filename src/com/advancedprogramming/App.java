@@ -1,38 +1,21 @@
 /*
- * Allowed functions:
- * java.lang.String
- * java.lang.Buffer
- * java.io.PrintStream
- * java.util.Scanner
- *
- * you cannot!! use java.util.StringTokenizer
- * Treating the input as a stream of characters is advised
+ * Author: Yuri Borges yuriborges@me.com
+ * Author: Jens van Groeningen jensvangroeningen@live.nl
+ * Date October 19, 2018
+ * Purpose: Calculator of Sets for the Advanced Programming course
+ * part of the CS bachelor of the university VU Amsterdam.
  * */
 
-
-//TODO destructor schrijven... scanner.close() mss ook in.close?
-
-//TODO VRAGEN TA wat ze met 10 identifiers bedoelen voor input en 20 voor set. bedoelen ze dat een set maar 20 elementen
-//kan hebben waarvan elk element maar 10 characters lang is?
-
-//TODO VRAGEN TA of error handling met IF's genoeg is óf we met error handling moeten gaan werken. Als het laatste
-// het geval is, dan moeten we ook weten de makkelijkste manier om die errors te catchen. Ivm Exception type zou ik
-// niet weten hoe error handling makkelijk kan in dit geval zonder dat we een eigen exeption type gaan maken en dat
-// lijkt me niet makkelijk
-
-//TODO TA onze code laten zien en vragen of er ruimte is voor verbeteringen
-//TODO commentaar overal schrijven voordat we naar de TA gaan
-//TODO vragen of class en interface set generic moeten.
-
-
 package com.advancedprogramming;
+
 import java.util.Scanner;
 import java.io.PrintStream;
 
 public class App {
-
+    
+    //Requirement of the assignment: max. 10 identifiers as input
     public static final int MAX_NUM_INDENTIFIERS_INPUT = 10;
-
+    
     PrintStream out = System.out;
     Scanner in = new Scanner(System.in);
 
@@ -41,11 +24,15 @@ public class App {
         app.start();
    }
 
+   /*
+   * Code execution uses the same approach as the template code.
+   * Start() uses a while loop to keep calling ask_both_sets(), ask_set() and input_contains_correct_set()
+   * */
    void start() {
 
        Set set1 = new Set(), set2 = new Set();
 
-       while (askBothSets( set1, set2)) {
+       while (ask_both_sets( set1, set2)) {
            //Calculates and prints the difference
            out.print("difference = ");
            Set differenceSet = set1.difference(set2);
@@ -73,33 +60,42 @@ public class App {
        }
    }
 
-    boolean askBothSets (Set set1, Set set2) {
-        return askSet("Give first set : ", set1) && askSet("Give second set : ", set2);
+    boolean ask_both_sets (Set set1, Set set2) {
+        return ask_set("Give first set : ", set1) && ask_set("Give second set : ", set2);
     }
         /* Function should parse the input into the Set object as long as the conditions for the input are met.
    * The conditions are:
    * 1 =< number of elements in the set <= 10
-   * first char of each element need to be a letter
-   * all elements should contain only alphanumeric characters
+   * first char of each element need to be a letter (checked during Idenfifier object instantiation)
+   * all elements should contain only alphanumeric characters (checked during Idenfifier object instantiation)
    * each set should have brackets around its elements */
-    boolean askSet (String question, Set set) {
+    boolean ask_set (String question, Set set) {
         do {
             out.printf("%s", question);
 
-        } while (! inputContainsCorrectSet(set));
+        } while (! input_contains_correct_set(set));
         return true;
     }
 
-    boolean inputContainsCorrectSet(Set set) {
+    boolean input_contains_correct_set(Set set) {
+        /*
+         * Unnecessary condition checking. hasNextLine() seems to never return false for this code. But the
+         * IF statement will be kept here so that we can show that we know how to use a Scanner the right way:
+         * checking for the existence of input first, then consuming it afterwards.
+         */
         if (in.hasNextLine()) {
 
+            //bufferLine will hold the text of each line
             String bufferLine = in.nextLine();
+
+            //bufferLine will be split into tokens using the space as delimiter. The sanity of each token will be checked
             String bufferToken;
 
-            //This 'if' makes sure that if there is no input, the user will just be asked for the set again.
+            /* This condition makes sure that if new line character is the only input character,
+             * the user will be asked for the set again.
+             */
              if ( bufferLine.length() < 1 ) return false;
 
-            //TODO this comment talks about 10 identifiers. Rewrite after TA meeting if needed.
             /* Calculates the amount of tokens in the stream. If the stream has more than 10 elements or less than
             0 elements then we need to ask for an element again. Comparison comes in the IF statement bellow  */
             int numTokens = bufferLine.split(in.delimiter().pattern()).length;
@@ -122,9 +118,14 @@ public class App {
                     //the value of the token in each iteration will be assigned to the String buffer
                     bufferToken = scString.next();
 
-                    Identifier identifier = new Identifier(bufferToken);
-                    populateArray(identifier.get_name(), set);
+                    /* Uses an Identifier class for educational purposes. The code could have checked the conditions
+                     * on the Identifiers without creating a class and an implementation.
+                     */
+                    Identifier identifier = new Identifier();
+                    if (!identifier.set_name(bufferToken)) return false;
+                    populate_array(identifier.get_name(), set);
                 }
+                return true;
             } else if ( bufferLine.charAt(0) != '{' ) {
                 if ( bufferLine.contains("{") ) { //check whether user put the '{' somewhere else than at the beginning
                     out.println("No input allowed before '{'");
@@ -148,10 +149,10 @@ public class App {
                 return false;
             }
         }
-        return true;
+        return false;
     }
 
-    void populateArray(String element, Set set) {
+    void populate_array(String element, Set set) {
         set.add(element);
     }
 

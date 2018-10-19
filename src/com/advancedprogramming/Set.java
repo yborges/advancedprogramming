@@ -1,5 +1,11 @@
-//{abc def ghi a12 b12 c12}
-//{abc ghi jen yur jan}
+/*
+ * Author: Yuri Borges yuriborges@me.com
+ * Author: Jens van Groeningen jensvangroeningen@live.nl
+ * Date October 19, 2018
+ * Purpose: Calculator of Sets for the Advanced Programming course
+ * part of the CS bachelor of the university VU Amsterdam.
+ * */
+
 package com.advancedprogramming;
 
 public class Set implements SetInterface {

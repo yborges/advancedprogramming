@@ -1,3 +1,11 @@
+/*
+ * Author: Yuri Borges yuriborges@me.com
+ * Author: Jens van Groeningen jensvangroeningen@live.nl
+ * Date October 19, 2018
+ * Purpose: Calculator of Sets for the Advanced Programming course
+ * part of the CS bachelor of the university VU Amsterdam.
+ * */
+
 package com.advancedprogramming;
 
 import java.io.PrintStream;
@@ -7,12 +15,6 @@ public class Identifier implements IdentifierInterface {
     private String text;
     private PrintStream out = System.out;
 
-    public Identifier(String newText) {
-        if(check_new_text_sanity(newText)) {
-            this.text = newText;
-        }
-    }
-
     @Override
     public String get_name() {
         return text;
@@ -21,10 +23,10 @@ public class Identifier implements IdentifierInterface {
     @Override
     public boolean set_name(String newText) {
         if (check_new_text_sanity(newText)) {
-
+            text = newText;
+            return true;
         }
-        text = newText;
-        return true;
+        return false;
     }
 
     private boolean check_new_text_sanity(String newText) {
